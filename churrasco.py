@@ -5,11 +5,11 @@ num_homem = int(input("Digite o número de homens: "))
 num_mulher = int(input("Digite o número de mulheres: "))
 num_crianca = int(input("Digite o número de crianças: "))
 
-# Define as quantidades de carne necessárias para cada tipo de pessoa, 
-# partindo do pressuposto que todos vao comer frango e pao de alho
+# Define as quantidades de carne necessárias para cada tipo de pessoa,
+# partindo do pressuposto que todos vão comer frango e pão de alho
 carne_por_homem = 0.5  # kg de carne
-carne_por_mulher = 0.4  
-carne_por_crianca = 0.2  
+carne_por_mulher = 0.4
+carne_por_crianca = 0.2
 frango_por_pessoa = 0.3
 pao_de_alho_por_pessoa = 1
 
@@ -30,9 +30,7 @@ quantidade_pao_de_alho = (
     + num_crianca * pao_de_alho_por_pessoa
 )
 
-
-# define os preços KG
-# Define os preços por kg de cada tipo de carne
+# Define os preços por kg
 preco_carne = {
     "Picanha": 40.0,
     "Alcatra": 30.0,
@@ -41,44 +39,40 @@ preco_carne = {
     "Frango": 20.0
 }
 
+# Inicializa a lista de carnes escolhidas pelo usuário
+carnes_escolhidas = []
+
 # Mostra as opções de carne ao usuário
-print("\nEscolha o tipo de carne que deseja:")
+print("\nEscolha o tipo de carne que deseja (digite o número da opção e pressione Enter):")
 print("1 - Picanha")
 print("2 - Alcatra")
 print("3 - Fraldinha")
 print("4 - Linguiça")
 print("5 - Frango")
+print("6 - Finalizar escolha de carnes")
 
 # Pede ao usuário que escolha o tipo de carne
-opcao_carne = int(input())
+while True:
+    opcao_carne = input()
+    if opcao_carne == "1":
+        carnes_escolhidas.append(("Picanha", preco_carne["Picanha"]))
+    elif opcao_carne == "2":
+        carnes_escolhidas.append(("Alcatra", preco_carne["Alcatra"]))
+    elif opcao_carne == "3":
+        carnes_escolhidas.append(("Fraldinha", preco_carne["Fraldinha"]))
+    elif opcao_carne == "4":
+        carnes_escolhidas.append(("Linguiça", preco_carne["Linguiça"]))
+    elif opcao_carne == "5":
+        carnes_escolhidas.append(("Frango", preco_carne["Frango"]))
+    elif opcao_carne == "6":
+        break
 
-# Verifica a escolha do usuário e calcula o custo da carne
-if opcao_carne == 1:
-    custo_carne = quantidade_carne * preco_carne["Picanha"]
-    tipo_carne = "Picanha"
-elif opcao_carne == 2:
-    custo_carne = quantidade_carne * preco_carne["Alcatra"]
-    tipo_carne = "Alcatra"
-elif opcao_carne == 3:
-    custo_carne = quantidade_carne * preco_carne["Fraldinha"]
-    tipo_carne = "Fraldinha"
-elif opcao_carne == 4:
-    custo_carne = quantidade_carne * preco_carne["Linguiça"]
-    tipo_carne = "Linguiça"
-elif opcao_carne == 5:
-    custo_carne = quantidade_frango * preco_carne["Frango"]
-    tipo_carne = "Frango"
-else:
-    print("Opção inválida. Escolha novamente.")
-
-
-# quantidades de bebidas por pessoa
-cerveja_por_homem = 2  # litros de cerveja
+cerveja_por_homem = 2  # litros
 cerveja_por_mulher = 1
 refrigerante_por_crianca = 0.5
 agua_por_pessoa = 1
 
-# calcula a quantidade total de bebidas 
+# Calcula a quantidade total de bebidas necessária
 quantidade_cerveja = (
     num_homem * cerveja_por_homem
     + num_mulher * cerveja_por_mulher
@@ -90,43 +84,53 @@ quantidade_agua = (
     + num_crianca * agua_por_pessoa
 )
 
-# Define os preços por litro de cada tipo de bebida
+# Define os preços por litro
 preco_bebida = {
-    "Cerveja": 8.00,
-    "Refrigerante": 4.00,
-    "Água": 2.50
+    "Cerveja": 8.0,
+    "Refrigerante": 4.0,
+    "Água": 2.5
 }
 
-print("\nEscolha o tipo de bebida que deseja:")
+# Inicializa as quantidades de bebida em zero
+quantidade_cerveja = 0
+quantidade_refrigerante = 0
+quantidade_agua = 0
+
+# Mostra as opções de bebida ao usuário
+print("\nEscolha o tipo de bebida que deseja (digite o número da opção e pressione Enter):")
 print("1 - Cerveja")
 print("2 - Refrigerante")
 print("3 - Água")
 print("4 - Finalizar escolha de bebidas")
 
+# Pede ao usuário que escolha o tipo de bebida
 while True:
-    opcao_bebida = int(input())
-    if opcao_bebida == 1:
+    opcao_bebida = input()
+    if opcao_bebida == "1":
         quantidade_cerveja += 1
-    elif opcao_bebida == 2:
+    elif opcao_bebida == "2":
         quantidade_refrigerante += 1
-    elif opcao_bebida == 3:
+    elif opcao_bebida == "3":
         quantidade_agua += 1
-    elif opcao_bebida == 4:
+    elif opcao_bebida == "4":
         break
 
-custo_carne = quantidade_carne * preco_carne[tipo_carne]
+# Calcula o custo total da carne
+custo_carne = sum([carne[1] for carne in carnes_escolhidas]) * quantidade_carne
 
+# Calcula o custo total das bebidas
 custo_bebida = (
     quantidade_cerveja * preco_bebida["Cerveja"]
     + quantidade_refrigerante * preco_bebida["Refrigerante"]
     + quantidade_agua * preco_bebida["Água"]
 )
 
+# Calcula o custo total do churrasco
 custo_total = custo_carne + custo_bebida
 
-# imprime na tela as informações
+# Imprime na tela as informações
 print("\nResumo do churrasco:")
-print("Quantidade de carne: {:.2f} kg de {}".format(quantidade_carne, tipo_carne))
+print("Quantidade de carne: {:.2f} kg".format(quantidade_carne))
 print("Quantidade de frango: {:.2f} kg".format(quantidade_frango))
 print("Quantidade de pão de alho: {}".format(quantidade_pao_de_alho))
 print("Quantidade de cerveja: {} litros".format(quantidade_cerveja))
