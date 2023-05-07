@@ -70,7 +70,6 @@ elif opcao_carne == 5:
     tipo_carne = "Frango"
 else:
     print("Opção inválida. Escolha novamente.")
-    # Adicione aqui uma lógica para lidar com a opção inválida ou encerrar o programa, se necessário.
 
 
 # quantidades de bebidas por pessoa
