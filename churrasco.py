@@ -32,11 +32,14 @@ quantidade_pao_de_alho = (
 
 
 # define os preços KG
-preco_picanha = 40.0
-preco_alcatra = 30.0
-preco_fraldinha = 25.0
-preco_linguica = 15.0
-preco_frango = 20.0
+# Define os preços por kg de cada tipo de carne
+preco_carne = {
+    "Picanha": 40.0,
+    "Alcatra": 30.0,
+    "Fraldinha": 25.0,
+    "Linguiça": 15.0,
+    "Frango": 20.0
+}
 
 # Mostra as opções de carne ao usuário
 print("\nEscolha o tipo de carne que deseja:")
@@ -44,6 +47,7 @@ print("1 - Picanha")
 print("2 - Alcatra")
 print("3 - Fraldinha")
 print("4 - Linguiça")
+print("5 - Frango")
 
 # Pede ao usuário que escolha o tipo de carne
 opcao_carne = int(input())
@@ -58,31 +62,48 @@ elif opcao_carne == 2:
 elif opcao_carne == 3:
     custo_carne = quantidade_carne * preco_carne["Fraldinha"]
     tipo_carne = "Fraldinha"
-else:
+elif opcao_carne == 4:
+    custo_carne = quantidade_carne * preco_carne["Linguiça"]
+    tipo_carne = "Linguiça"
+elif opcao_carne == 5:
     custo_carne = quantidade_frango * preco_carne["Frango"]
     tipo_carne = "Frango"
+else:
+    print("Opção inválida. Escolha novamente.")
+    # Adicione aqui uma lógica para lidar com a opção inválida ou encerrar o programa, se necessário.
 
 
-#  os preços de cada tipo de bebida  litro
+# quantidades de bebidas por pessoa
+cerveja_por_homem = 2  # litros de cerveja
+cerveja_por_mulher = 1
+refrigerante_por_crianca = 0.5
+agua_por_pessoa = 1
+
+# calcula a quantidade total de bebidas 
+quantidade_cerveja = (
+    num_homem * cerveja_por_homem
+    + num_mulher * cerveja_por_mulher
+)
+quantidade_refrigerante = num_crianca * refrigerante_por_crianca
+quantidade_agua = (
+    num_homem * agua_por_pessoa
+    + num_mulher * agua_por_pessoa
+    + num_crianca * agua_por_pessoa
+)
+
+# Define os preços por litro de cada tipo de bebida
 preco_bebida = {
     "Cerveja": 8.00,
     "Refrigerante": 4.00,
     "Água": 2.50
 }
 
-# inicializa as quantidades de bebida em zero
-quantidade_cerveja = 0
-quantidade_refrigerante = 0
-quantidade_agua = 0
-
-# mostra as opções de bebida 
 print("\nEscolha o tipo de bebida que deseja:")
 print("1 - Cerveja")
 print("2 - Refrigerante")
 print("3 - Água")
 print("4 - Finalizar escolha de bebidas")
 
-# solicita ao usuário a escolha de bebida e calcula a quantidade
 while True:
     opcao_bebida = int(input())
     if opcao_bebida == 1:
@@ -104,11 +125,12 @@ custo_bebida = (
 
 custo_total = custo_carne + custo_bebida
 
-
-# imprime na tela as informações 
+# imprime na tela as informações
 print("\nResumo do churrasco:")
 print("Quantidade de carne: {:.2f} kg de {}".format(quantidade_carne, tipo_carne))
-print("Quantidade de cerveja: {}".format(quantidade_cerveja))
-print("Quantidade de refrigerante: {}".format(quantidade_refrigerante))
-print("Quantidade de água: {}".format(quantidade_agua))
+print("Quantidade de frango: {:.2f} kg".format(quantidade_frango))
+print("Quantidade de pão de alho: {}".format(quantidade_pao_de_alho))
+print("Quantidade de cerveja: {} litros".format(quantidade_cerveja))
+print("Quantidade de refrigerante: {} litros".format(quantidade_refrigerante))
+print("Quantidade de água: {} litros".format(quantidade_agua))
 print("Custo total do churrasco: R$ {:.2f}".format(custo_total))
